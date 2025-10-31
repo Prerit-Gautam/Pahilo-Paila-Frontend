@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Interactive Map Functionality
-    const mapPins = document.querySelectorAll('.map-pin');
+    const mapPins = document.querySelectorAll('.pin, .map-pin');
     const messageText = document.querySelector('.message-text');
     const locationName = document.querySelector('.location-name');
 
@@ -76,10 +76,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add active class to clicked pin
                 this.classList.add('active');
 
-                // Get data attributes from parent container
-                const container = this.parentElement;
-                const location = container.getAttribute('data-location');
-                const message = container.getAttribute('data-message');
+                // Get data attributes from the pin element or parent container
+                let location, message;
+
+                if (this.classList.contains('pin')) {
+                    // New pin structure - data is on the pin itself
+                    location = this.getAttribute('data-location');
+                    message = this.getAttribute('data-message');
+                } else {
+                    // Old SVG structure - data is on parent container
+                    const container = this.parentElement;
+                    location = container.getAttribute('data-location');
+                    message = container.getAttribute('data-message');
+                }
 
                 // Update message display with animation
                 messageText.style.opacity = '0';

@@ -281,6 +281,14 @@ header.scrolled .nav-links a {
     width: 100%;
     max-width: 800px;
     margin-bottom: 30px;
+    position: relative;
+}
+
+.nepal-map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
 }
 
 .nepal-svg {
@@ -311,6 +319,91 @@ header.scrolled .nav-links a {
 .map-pin.active {
     fill: var(--primary-color);
     transform: scale(1.5);
+}
+
+/* New Pin Styles for Image Map */
+.pin {
+    position: absolute;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.pin-marker {
+    width: 24px;
+    height: 24px;
+    background-color: var(--secondary-color);
+    border: 3px solid var(--white);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pin-marker::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--secondary-color);
+}
+
+.pin-label {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark-color);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.pin:hover .pin-marker {
+    background-color: var(--primary-color);
+    transform: scale(1.3);
+}
+
+.pin:hover .pin-marker::after {
+    border-top-color: var(--primary-color);
+}
+
+.pin:hover .pin-label {
+    opacity: 1;
+}
+
+.pin.active .pin-marker {
+    background-color: var(--primary-color);
+    transform: scale(1.3);
+    animation: pulse 1.5s infinite;
+}
+
+.pin.active .pin-marker::after {
+    border-top-color: var(--primary-color);
+}
+
+.pin.active .pin-label {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(46, 125, 50, 0.7);
+    }
+    50% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(46, 125, 50, 0);
+    }
 }
 
 .location-info {
@@ -461,5 +554,27 @@ footer {
     
     .footer-links {
         grid-template-columns: 1fr;
+    }
+
+    /* Pin adjustments for mobile */
+    .pin-marker {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pin-label {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
+    .pin-marker::after {
+        bottom: -6px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid var(--secondary-color);
+    }
+
+    .nepal-map-container {
+        padding: 20px;
     }
 }
