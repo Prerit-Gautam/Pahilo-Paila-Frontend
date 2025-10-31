@@ -5,6 +5,9 @@ document.getElementById('query').addEventListener('keypress', (e) => {
 
 let lastParsedData = null;
 
+// read VITE env var (available at build time). keep a fallback to API_KEY if you built that way.
+const OPENROUTER_KEY = import.meta?.env?.VITE_OPENROUTER_KEY || import.meta?.env?.API_KEY || '';
+
 // 2. Add event listeners for the new functional buttons
 document.getElementById('coordsBtn').addEventListener('click', () => displayDetails('coordinates'));
 document.getElementById('eventsBtn').addEventListener('click', () => displayDetails('events'));
@@ -101,7 +104,13 @@ async function sendRequest() {
   try {
     // responseElement.textContent = 'Searching for place details...'; // Removed display
     outputElement.textContent = 'Searching...';
-    
+
+    if (!OPENROUTER_KEY) {
+      outputElement.textContent = 'Missing API key. Set VITE_OPENROUTER_KEY in .env and rebuild.';
+      setButtonsDisabled(true);
+      return;
+    }
+
     // ... (Prompt text remains unchanged as per instruction) ...
     const promptText = `
 You are an assistant that maps a user description to real places within Nepal.
@@ -143,7 +152,7 @@ Respond concisely and only as the described JSON.
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
+        "Authorization": `Bearer ${OPENROUTER_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
