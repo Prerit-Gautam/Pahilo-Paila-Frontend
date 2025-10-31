@@ -1,194 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PahiloPaila - Discover Rural Nepal</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="../CSS/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="preloader">
-        <div class="loader"></div>
+      <div class="loader"></div>
     </div>
 
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <h1>PahiloPaila</h1>
-            </div>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="guide_marketplace.html">Guides</a></li>
-                    <li><a href="#">About Us</a></li>
-                </ul>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
+      <nav class="navbar">
+        <div class="logo">
+          <h1>PahiloPaila</h1>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="guide_marketplace.html">Guides</a></li>
+            <li><a href="travel_stories.html">Travel Stories</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="animate-text">Experience the Untouched Beauty of Rural Nepal</h1>
-                <p class="animate-text-delay">Discover hidden gems, authentic cultures, and breathtaking landscapes</p>
-                <div class="cta-buttons">
-                    <a href="guide_marketplace.html" class="btn primary-btn">Find a Guide</a>
-                    <a href="#about" class="btn secondary-btn">Learn More</a>
-                </div>
-            </div>
-        </section>
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="animate-text">Experience the Untouched Beauty of Rural Nepal</h1>
+          <p class="animate-text-delay">Discover hidden gems, authentic cultures, and breathtaking landscapes</p>
+          <div class="cta-buttons">
+            <a href="guide_marketplace.html" class="btn primary-btn">Find a Guide</a>
+            <a href="#about" class="btn secondary-btn">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta-button-container" style="text-align: center; margin: 30px 0;">
+            <a href="discover.html" class="btn primary-btn">YOUR AI GUIDE</a>
+        </div>
 
         <section id="featured" class="featured-destinations">
-            <div class="section-header">
-                <h2>Explore Nepal</h2>
-                <p>Discover hidden gems and authentic local experiences</p>
-            </div>
-            <div class="nepal-map-container">
-                <div class="nepal-map">
-                    <img src="../photo/Nepal_Urban_Municipality.svg.png" alt="Map of Nepal" class="nepal-map-image">
-
-                    <!-- Map Pins - Exact District Positions -->
-
-                    <!-- Humla - Far NW corner, Tibet border -->
-                    <div class="pin" data-location="Humla" data-message="Hello, I'm Dorje. I am from Humla. During autumn, we harvest yarsagumba, a rare medicinal herb found only in the high Himalayas." style="left: 18%; top: 22%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Humla</span>
-                    </div>
-
-                    <!-- Mugu - NW, between Humla and Jumla -->
-                    <div class="pin" data-location="Mugu" data-message="Namaste, I'm Chandra. I am from Mugu. Our village produces handmade paper from lokta bark, a craft passed down through centuries." style="left: 25%; top: 28%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Mugu</span>
-                    </div>
-
-                    <!-- Rara/Mugu District - NW -->
-                    <div class="pin" data-location="Rara" data-message="Hi, I'm Laxmi. I am from Rara. Every summer, we celebrate the beauty of Rara Lake with traditional dances and harvest fish using sustainable methods." style="left: 27%; top: 32%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Rara</span>
-                    </div>
-
-                    <!-- Jumla - Mid-Western, Karnali -->
-                    <div class="pin" data-location="Jumla" data-message="Hello, I'm Hari. Our community is known for organic red rice farming. We use traditional irrigation systems that have existed for centuries." style="left: 32%; top: 35%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Jumla</span>
-                    </div>
-
-                    <!-- Mustang - North-Central, Tibet border -->
-                    <div class="pin" data-location="Mustang" data-message="Namaste, I'm Tenzin. In our village, we preserve ancient Tibetan Buddhist traditions and grow rare medicinal herbs found only in this high-altitude region." style="left: 45%; top: 18%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Mustang</span>
-                    </div>
-
-                    <!-- Gorkha - Central Nepal -->
-                    <div class="pin" data-location="Gorkha" data-message="Namaste, I'm Ramesh. Our village is famous for traditional honey hunting, where we climb cliffs to harvest wild honey from giant bee hives." style="left: 55%; top: 38%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Gorkha</span>
-                    </div>
-
-                    <!-- Bandipur/Tanahun - Central Nepal -->
-                    <div class="pin" data-location="Bandipur" data-message="I'm Krishna from Bandipur. I am from this historic trading town. We preserve Newari architecture and craft traditional dhaka fabric with intricate patterns." style="left: 57%; top: 45%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Bandipur</span>
-                    </div>
-
-                    <!-- Dolakha - East of Kathmandu -->
-                    <div class="pin" data-location="Dolakha" data-message="Hi, I am Kamala. I am from Dolakha. Every winter people make wool blankets here using traditional techniques passed down for generations." style="left: 68%; top: 42%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Dolakha</span>
-                    </div>
-
-                    <!-- Solukhumbu - NE, Everest region -->
-                    <div class="pin" data-location="Solukhumbu" data-message="Namaste, I'm Mingma. I am from Solukhumbu. Our Sherpa community has been guiding mountaineers for generations while maintaining our Buddhist traditions." style="left: 78%; top: 28%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Solukhumbu</span>
-                    </div>
-
-                    <!-- Ilam - Far Eastern Nepal -->
-                    <div class="pin" data-location="Ilam" data-message="I'm Pema from Ilam. Our tea gardens produce some of the finest orthodox tea in the world. Every spring, we celebrate the first harvest with a special ceremony." style="left: 90%; top: 55%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Ilam</span>
-                    </div>
-
-                    <!-- Bardiya - SW Terai -->
-                    <div class="pin" data-location="Bardiya" data-message="I'm Sita from Bardiya. Our Tharu community preserves ancient crafts like bamboo weaving and mud art that tell stories of our relationship with the forest." style="left: 15%; top: 65%;">
-                        <div class="pin-marker"></div>
-                        <span class="pin-label">Bardiya</span>
-                    </div>
-                </div>
-                <div class="location-info">
-                    <h3>Click on a location to learn about local traditions</h3>
-                    <div class="location-message">
-                        <p class="message-text">Discover the unique stories of Nepal's rural communities</p>
-                        <p class="location-name"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about-section">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About PahiloPaila</h2>
-                    <p>Nepal's beauty attracts the world — but the locals who bring it to life often stay unseen. PahiloPaila connects travelers with local guides, hosts, and rural communities through AI-driven cultural matching.</p>
-                    <p>We go beyond booking trips — we match people, stories, and experiences. Tourists find authentic stays and guides that fit their mood and interests, while locals gain real visibility, income, and pride.</p>
-                    <p>With PahiloPaila, every journey becomes the first step toward empowering Nepal — one connection at a time.</p>
-                    <a href="#" class="btn primary-btn">Learn More About Us</a>
-                </div>
-                <div class="about-image">
-                    <!-- Image will be added via CSS -->
-                </div>
-            </div>
-        </section>
-
-
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>PahiloPaila</h2>
-                <p>Your gateway to authentic rural Nepal</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="guide_marketplace.html">Guides</a></li>
-                        <li><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Thamel, Kathmandu, Nepal</li>
-                        <li><i class="fas fa-phone"></i> +977 1234567890</li>
-                        <li><i class="fas fa-envelope"></i> info@pahilopaila.com</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
+        <div class="section-header">
+          <h2>Explore Nepal</h2>
+          <p>Discover hidden gems and authentic local experiences</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 PahiloPaila. All rights reserved.</p>
-        </div>
-    </footer>
+        <div class="nepal-map-container">
+          <div class="nepal-map">
+            <img
+              src="../photo/Nepal_Urban_Municipality.svg.png"
+              alt="Map of Nepal"
+              class="nepal-map-image"
+            />
 
-    <script src="../JS/index.js"></script>
-</body>
-</html>
+            <!-- Map Pins - Exact District Positions -->
+
+            <!-- Humla - Far NW corner, Tibet border -->
+            <div
+              class="pin"
+              data-location="Humla"
+              data-message="Hello, I'm Dorje. I am from Humla. During autumn, we harvest yarsagumba, a rare medicinal herb found only in the high Himalayas."
+              style="left: 18%; top: 22
