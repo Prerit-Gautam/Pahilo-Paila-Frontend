@@ -1,0 +1,15 @@
+ body { font-family: sans-serif; padding: 20px; }
+    #controls { display: flex; gap: 10px; margin-bottom: 20px; }
+    #query { padding: 10px; width: 300px; }
+    #searchBtn { padding: 10px 15px; cursor: pointer; }
+    #buttonContainer { display: flex; gap: 10px; margin-top: 15px; }
+    #buttonContainer button { padding: 8px 12px; cursor: pointer; background-color: #f0f0f0; border: 1px solid #ccc; }
+    #buttonOutput { 
+      margin-top: 10px; 
+      padding: 10px; 
+      border: 1px solid #ddd; 
+      min-height: 20px; 
+      white-space: pre-wrap;
+      background-color: #e9ecef;
+    }
+    /*water*/
