@@ -85,25 +85,32 @@ function setButtonsDisabled(disabled) {
 
 
 async function sendRequest() {
-  const query = document.getElementById('query').value;
-  // const responseElement = document.getElementById('response'); // Removed reference
-  const outputElement = document.getElementById('buttonOutput');
+  const query = document.getElementById('query').value;
+  const outputElement = document.getElementById('buttonOutput');
   
-  lastParsedData = null; // Clear previous data
-  setButtonsDisabled(true); // Disable buttons before search
+  lastParsedData = null;
+  setButtonsDisabled(true);
 
-  if (!query.trim()) {
-    // responseElement.textContent = 'Please enter a place name or description in Nepal'; // Removed display
-    outputElement.textContent = 'Please enter a place name or description in Nepal.';
-    return;
-  }
+  if (!query.trim()) {
+    outputElement.textContent = 'Please enter a place name or description in Nepal.';
+    return;
+  }
 
-  try {
-    // responseElement.textContent = 'Searching for place details...'; // Removed display
-    outputElement.textContent = 'Searching...';
-    
-    // ... (Prompt text remains unchanged as per instruction) ...
-    const promptText = `
+  try {
+    outputElement.textContent = 'Searching...';
+
+    // First fetch the API key
+    let apiKey;
+    try {
+      const keyResponse = await fetch('https://pahilopaila-backend-demo.onrender.com/pahilopaila/getApiKey');
+      const keyData = await keyResponse.json();
+      apiKey = keyData.key;
+    } catch (error) {
+      outputElement.textContent = 'Failed to fetch API key';
+      return;
+    }
+    
+    const promptText = `
 You are an assistant that maps a user description to real places within Nepal.
 User description: "${query}"
 
@@ -140,33 +147,33 @@ OUTPUT REQUIREMENTS — STRICT JSON ONLY:
 Respond concisely and only as the described JSON.
 `;
 
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
-        "messages": [
-          {
-            "role": "user",
-            "content": [
-              {
-                "type": "text",
-                "text": promptText
-              }
-            ]
-          }
-        ],
-        "temperature": 0.2,
-        "max_tokens": 600
-      })
-    });
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "messages": [
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": promptText
+              }
+            ]
+          }
+        ],
+        "temperature": 0.2,
+        "max_tokens": 600
+      })
+    });
 
-    const data = await response.json();
+    const data = await response.json();
 
-    const raw = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+    const raw = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
       || data.choices?.[0]?.text
       || data.text
       || JSON.stringify(data, null, 2);
@@ -176,20 +183,17 @@ Respond concisely and only as the described JSON.
     try {
       const parsed = JSON.parse(contentStr);
       lastParsedData = parsed; // Store the parsed data
-      // responseElement.textContent = JSON.stringify(parsed, null, 2); // Removed display
       outputElement.textContent = 'Search successful. Click a button for details.';
       
       // 3. Enable buttons if a successful match is found (or if note is present for noteBtn)
       setButtonsDisabled(false);
 
     } catch (e) {
-      // responseElement.textContent = 'Invalid JSON response from model. Raw response:\n\n' + contentStr; // Removed display
       outputElement.textContent = 'Error in response processing. Raw JSON was invalid.';
       setButtonsDisabled(true);
     }
     
   } catch (error) {
-    // responseElement.textContent = 'Error: ' + error.message; // Removed display
     outputElement.textContent = 'Request failed due to network or API error.';
     setButtonsDisabled(true);
   }
