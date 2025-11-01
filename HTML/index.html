@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PahiloPaila - Discover Rural Nepal</title>
+    <link rel="stylesheet" href="../CSS/index.css" />
+    <link rel="stylesheet" href="../CSS/toast.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="loader"></div>
+    </div>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"><h1>PahiloPaila</h1></a>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="guide_marketplace.html">Guides</a></li>
+            <li><a href="travel_stories.html">Travel Stories</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#featured">Explore</a></li>
+            <li><a href="chatbot.html">AI Assistant</a></li>
+            <!-- Mobile Authentication Buttons -->
+            <li class="mobile-auth-buttons">
+              <button
+                id="mobileLoginBtn"
+                class="btn secondary-btn"
+                style="width: 100%; margin-bottom: 10px"
+              >
+                Login
+              </button>
+              <button
+                id="mobileRegisterBtn"
+                class="btn primary-btn"
+                style="width: 100%"
+              >
+                Register
+              </button>
+            </li>
+            <!-- Mobile User Profile -->
+            <li
+              id="mobileUserProfile"
+              class="mobile-user-profile"
+              style="display: none; padding: 15px; text-align: center"
+            >
+              <div style="margin-bottom: 10px; color: var(--dark-color)">
+                Welcome, <span id="mobileUserEmail"></span>
+              </div>
+              <button
+                id="mobileLogoutBtn"
+                class="btn secondary-btn"
+                style="width: 100%"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+        <!-- Authentication Buttons -->
+        <div class="auth-buttons">
+          <button id="loginBtn" class="btn secondary-btn">Login</button>
+          <button id="registerBtn" class="btn primary-btn">Register</button>
+        </div>
+        <!-- User Profile (Hidden by default) -->
+        <div id="userProfile" class="user-profile" style="display: none">
+          <div class="user-info">
+            <span id="userEmail"></span>
+            <button id="logoutBtn" class="btn secondary-btn">Logout</button>
+          </div>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="auth-form-container">
+          <div class="form-header">
+            <h2 id="formTitle">Welcome to PahiloPaila</h2>
+            <p id="formSubtitle">Sign in to continue your journey</p>
+          </div>
+
+          <div class="auth-tabs">
+            <button id="loginTab" class="tab-btn active">Login</button>
+            <button id="registerTab" class="tab-btn">Register</button>
+          </div>
+
+          <form id="authForm">
+            <div class="input-group" id="nameGroup" style="display: none">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <div
+              class="input-group"
+              id="confirmPasswordGroup"
+              style="display: none"
+            >
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+              />
+            </div>
+
+            <button type="submit" class="btn primary-btn auth-submit-btn" >
+              Continue
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            <p>
+              By continuing, you agree to our
+              <a href="#">Terms of Service</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero">
+        <!-- Parallax floating elements -->
+        <div class="parallax-element parallax-1"></div>
+        <div class="parallax-element parallax-2"></div>
+
+        <div class="hero-content">
+          <h1 class="typing-text">
+            Experience the Untouched Beauty of Rural Nepal
+          </h1>
+          <p>
+            Discover hidden gems, authentic cultures, and breathtaking
+            landscapes with local guides who know their homeland best
+          </p>
+          <div class="cta-buttons">
+            <a href="guide_marketplace.html" class="btn primary-btn floating"
+              >Find a Guide</a
+            >
+            <a href="#about" class="btn secondary-btn floating">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us Section -->
+      <section class="why-choose-section">
+        <div class="section-header">
+          <h2>Why Choose PahiloPaila?</h2>
+          <p>More than just a travel platform - a gateway to authentic Nepal</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Local Expertise</h3>
+            <p>
+              Connect with certified local guides who grew up in the villages
+              they showcase. Their stories aren't scripted - they're lived
+              experiences.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Sustainable Tourism</h3>
+            <p>
+              Every booking directly supports rural families and communities.
+              Tourism that gives back, not takes away.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Safe & Verified</h3>
+            <p>
+              All our guides are background-checked and trained. Your safety and
+              comfort are our top priorities.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mountain"></i>
+            </div>
+            <h3>Off the Beaten Path</h3>
+            <p>
+              Discover places tourism books don't mention. Hidden waterfalls,
+              ancient trails, and local festivals.
+            </p>
+          </div>
+        </div>
+        <div class="ai-guide-cta">
+          <div class="ai-guide-content">
+            <div class="ai-guide-text">
+              <h3><i class="fas fa-robot"></i> Not sure where to start?</h3>
+              <p>
+                Our AI-powered guide can help you find the perfect rural
+                experience based on your interests and travel style.
+              </p>
+            </div>
+            <a href="discover.html" class="btn primary-btn">Try AI Guide</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured" class="featured-destinations">
+        <div class="section-header">
+          <h2>Explore Nepal's Hidden Treasures</h2>
+          <p>
+            Discover unique stories and authentic experiences from rural
+            communities across Nepal
+          </p>
+        </div>
+        <div class="nepal-map-container">
+          <div class="nepal-map">
+            <img
+              src="../photo/Nepal_Urban_Municipality.svg.png"
+              alt="Map of Nepal"
+              class="nepal-map-image"
+            />
+          </div>
+
+          <!-- District Stories Carousel -->
+          <div class="district-stories-carousel">
+            <div class="story-slider">
+              <div class="story-slide active">
+                <h3>Humla</h3>
+                <p>
+                  Hello, I'm Dorje from Humla. During autumn, we harvest
+                  yarsagumba, a rare medicinal herb found only in the high
+                  Himalayas above 4000 meters.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Mugu</h3>
+                <p>
+                  Hi, I'm Lakpa from Mugu. Our village surrounds the sacred Rara
+                  Lake. We trade salt with Tibet and practice ancient Bon
+                  traditions.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Bajura</h3>
+                <p>
+                  Namaste! I'm Kalpana from Bajura. We cultivate apples in our
+                  mountain orchards and weave traditional Dhaka fabric that
+                  takes weeks to complete by hand.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Bardiya</h3>
+                <p>
+                  Namaste! I'm Prakash from Bardiya. Our Tharu community lives
+                  in traditional mud houses with beautiful wall paintings. We
+                  share our land with wild elephants.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Dolpa</h3>
+                <p>
+                  Hello, I'm Karma from Dolpa. Shey Phoksundo Lake, our sacred
+                  turquoise jewel, is Nepal's deepest lake. We still practice
+                  Tibetan Buddhism and trade with yak caravans.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Jajarkot</h3>
+                <p>
+                  Hi, I'm Buddhi from Jajarkot. Our women create beautiful Namda
+                  felt carpets from local sheep wool during winter months. Each
+                  carpet tells a story.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Rolpa</h3>
+                <p>
+                  Namaste! I'm Sunita from Rolpa. We grow organic cardamom and
+                  mandarin oranges. Our village celebrates Maghe Sankranti with
+                  traditional Madal drum performances.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Dang</h3>
+                <p>
+                  Hello! I'm Goma from Dang. Our Dang valley is known for
+                  organic vegetables and traditional Tharu Maghauta stick dance
+                  performed during harvest time.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Mustang</h3>
+                <p>
+                  Namaste! I'm Tsering from Mustang. Our ancient caves and
+                  monasteries tell stories of the old Tibetan kingdom. We
+                  celebrate Tiji festival with masked dances.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Manang</h3>
+                <p>
+                  Hi, I'm Dawa from Manang. We celebrate Yartung festival every
+                  year with horse racing and archery. Our village sits at 3,500m
+                  with views of Annapurna.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Lamjung</h3>
+                <p>
+                  Hello! I'm Bishnu from Lamjung. Our village produces the
+                  finest honey and we practice traditional Gurung culture with
+                  Rodhi gatherings for youth.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Rasuwa</h3>
+                <p>
+                  Hello! I'm Pemba from Rasuwa. We make yak cheese and butter in
+                  the Langtang valley. Our village was rebuilt with love after
+                  the 2015 earthquake.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Sindhupalchok</h3>
+                <p>
+                  Namaste! I'm Maya from Sindhupalchok. We grow sweet oranges on
+                  terraced hills and celebrate Sonam Losar with our Tamang
+                  community.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Gorkha</h3>
+                <p>
+                  Namaste! I'm Ram from Gorkha, birthplace of Prithvi Narayan
+                  Shah. We maintain ancient Newari architecture and cultivate
+                  terraced rice fields using traditional methods.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Kavre</h3>
+                <p>
+                  Hi, I'm Sarita from Kavre. We grow organic coffee on our
+                  hillsides and celebrate Yomari Punhi by making sweet rice
+                  dumplings in sacred shapes.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Chitwan</h3>
+                <p>
+                  Hello! I'm Sita from Chitwan. Our national park is home to
+                  one-horned rhinos and Bengal tigers. We practice Tharu culture
+                  with stick dances and colorful festivals.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Parsa</h3>
+                <p>
+                  Namaste! I'm Urmila from Parsa. We grow sugarcane and make
+                  traditional sweets. Our village celebrates Chhath festival by
+                  the river with devotion.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Dolakha</h3>
+                <p>
+                  Hi, I'm Kamala from Dolakha. Here, our women weave beautiful
+                  woolen blankets and shawls during winter. We also harvest wild
+                  honey from cliff hives.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Ramechhap</h3>
+                <p>
+                  Hi, I'm Sanjay from Ramechhap. Our village produces handmade
+                  Lokta paper from Daphne plant bark. This paper lasts over
+                  1,000 years!
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Sindhuli</h3>
+                <p>
+                  Namaste! I'm Pramila from Sindhuli. We cultivate ginger and
+                  turmeric in our terraced farms. Our BP Highway connects us
+                  while we preserve mountain traditions.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Okhaldhunga</h3>
+                <p>
+                  Hi, I'm Indra from Okhaldhunga. We practice organic farming on
+                  steep slopes and maintain ancient Rai traditions. Our village
+                  produces excellent millet wine.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Khotang</h3>
+                <p>
+                  Namaste! I'm Sangita from Khotang. We grow cardamom under
+                  forest shade and our villages celebrate Ubhauli and Udhauli
+                  migration festivals with traditional dances.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Udayapur</h3>
+                <p>
+                  Namaste! I'm Kabita from Udayapur. Our Limbu and Rai
+                  communities grow rice and vegetables. We celebrate harvest
+                  with traditional Dhan Nach dance.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Solukhumbu</h3>
+                <p>
+                  Hello! I'm Pasang from Solukhumbu. We are Sherpa people living
+                  in the shadow of Mount Everest. We guide mountaineers and brew
+                  traditional chang.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Sankhuwasabha</h3>
+                <p>
+                  Hello! I'm Nim from Sankhuwasabha. We collect Chiraito, a
+                  precious medicinal herb, and our Rai community performs Sakela
+                  dance during planting season.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Taplejung</h3>
+                <p>
+                  Namaste! I'm Dhan from Taplejung. We cultivate Himalayan tea
+                  under the shadow of Kanchenjunga. Our Limbu community
+                  celebrates Chasok Tangnam harvest festival.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Terhathum</h3>
+                <p>
+                  Hi, I'm Ganesh from Terhathum. We grow cardamom, ginger and
+                  oranges. Our village celebrates both Limbu Chasok and Nepali
+                  festivals with equal joy.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Bhojpur</h3>
+                <p>
+                  Hello! I'm Tanka from Bhojpur. We grow famous Bhojpuri tea and
+                  our blacksmiths make traditional Khukuri knives using ancient
+                  techniques.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Dhankuta</h3>
+                <p>
+                  Namaste! I'm Shova from Dhankuta. Our town is famous for
+                  traditional sweets called Sikarni and handwoven textiles. We
+                  maintain rich Newar culture in the hills.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Panchthar</h3>
+                <p>
+                  Hi, I'm Laxmi from Panchthar. Our hills produce aromatic tea
+                  and cardamom. We celebrate Limbu New Year with traditional
+                  Chyabrung drum dances.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Ilam</h3>
+                <p>
+                  Hello! I'm Bikash from Ilam. Our misty hills produce Nepal's
+                  finest orthodox tea. We handpick tea leaves at sunrise when
+                  they're covered in dew.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Siraha</h3>
+                <p>
+                  Namaste! I'm Mina from Siraha. Our Maithili community
+                  practices traditional fish farming and creates beautiful
+                  Mithila paintings that tell ancient stories.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Saptari</h3>
+                <p>
+                  Hi, I'm Rupa from Saptari. We cultivate rice, fish, and
+                  practice Mithila art. Our women create intricate paintings on
+                  walls during festivals.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Sunsari</h3>
+                <p>
+                  Hello! I'm Rajesh from Sunsari. We grow jute and rice in
+                  fertile plains. Our Koshi River brings blessings and our
+                  communities celebrate Chhath with devotion.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Morang</h3>
+                <p>
+                  Namaste! I'm Sunita from Morang. We cultivate tea, jute and
+                  lentils. Our diverse community celebrates both Kirat and
+                  Madhesi festivals throughout the year.
+                </p>
+              </div>
+              <div class="story-slide">
+                <h3>Jhapa</h3>
+                <p>
+                  Hi, I'm Ramesh from Jhapa. Our plains produce rice, tea, and
+                  vegetables. We blend Nepali, Indian and indigenous cultures in
+                  beautiful harmony.
+                </p>
+              </div>
+            </div>
+            <div class="slider-controls">
+              <button class="prev-btn">&lt; Prev</button>
+              <div class="slider-dots">
+                <!-- Dots will be generated by JavaScript -->
+              </div>
+              <button class="next-btn">Next &gt;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="how-it-works-section">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Your journey to authentic Nepal in 4 simple steps</p>
+        </div>
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Browse & Discover</h3>
+              <p>
+                Explore our curated collection of rural destinations and local
+                guides across Nepal.
+              </p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Connect with Guides</h3>
+              <p>
+                Chat with verified local guides, ask questions, and customize
+                your experience.
+              </p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Book Securely</h3>
+              <p>
+                Reserve your spot with our secure payment system. Flexible
+                cancellation policies.
+              </p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Experience & Share</h3>
+              <p>
+                Immerse yourself in authentic culture and share your story with
+                our community.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="about-section">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>About PahiloPaila</h2>
+            <p>
+              <strong>"PahiloPaila"</strong> means "First Step" in Nepali. We
+              are that first step towards discovering the real Nepal - beyond
+              Kathmandu, beyond Everest Base Camp.
+            </p>
+            <p>
+              Founded by a team of Nepali travel enthusiasts and technologists,
+              we believe that the most memorable travel experiences happen when
+              you step off the tourist trail. Our platform bridges the gap
+              between curious travelers and passionate local guides in rural
+              Nepal.
+            </p>
+            <p>
+              From the high Himalayas of Mustang to the Terai plains of Chitwan,
+              we've partnered with over 150+ local guides across 40+ rural
+              communities. Every journey creates meaningful connections,
+              supports local economies, and preserves traditional cultures.
+            </p>
+            <div class="stats-row">
+              <div class="stat-item">
+                <span class="stat-number">150+</span>
+                <span class="stat-label">Local Guides</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">40+</span>
+                <span class="stat-label">Villages</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">2,500+</span>
+                <span class="stat-label">Happy Travelers</span>
+              </div>
+            </div>
+            <a
+              href="guide_marketplace.html"
+              class="btn primary-btn"
+              style="margin-top: 30px"
+              >Meet Our Guides</a
+            >
+          </div>
+          <div class="about-image"></div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials-section">
+        <div class="section-header">
+          <h2>Traveler Stories</h2>
+          <p>Real experiences from real travelers</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Our guide Ram took us to his family's farm in Gorkha. We learned
+              to cook traditional dal bhat and heard stories about the village
+              that no guidebook could ever tell. This was the Nepal I dreamed
+              of."
+            </p>
+            <div class="testimonial-author">
+              <strong>Sarah M.</strong>
+              <span>From Australia</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Tsering showed us Mustang's hidden caves and shared legends
+              passed down through generations. It felt like stepping back in
+              time. The authentic hospitality was overwhelming."
+            </p>
+            <div class="testimonial-author">
+              <strong>James K.</strong>
+              <span>From UK</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Instead of crowded tourist spots, we stayed with a local family
+              in Chitwan. The food, the warmth, the sunrise walks - everything
+              was magical. PahiloPaila gave us memories we'll treasure forever."
+            </p>
+            <div class="testimonial-author">
+              <strong>Priya & Arjun</strong>
+              <span>From India</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>PahiloPaila</h3>
+            <p>Your first step to discovering authentic rural Nepal</p>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="guide_marketplace.html">Find Guides</a></li>
+              <li><a href="travel_stories.html">Travel Stories</a></li>
+              <li><a href="discover.html">AI Guide</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 PahiloPaila. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../JS/index.js"></script>
+
+    <!-- Toast Notification System -->
+    <script src="../JS/toast.js"></script>
+
+    <!-- Backend Authentication -->
+    <script src="../JS/backend-auth.js"></script>
+  </body>
+</html>
