@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guide Marketplace - PahiloPaila</title>
+    <link rel="stylesheet" href="../CSS/guide_marketplace.css" />
+    <link rel="stylesheet" href="../CSS/toast.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header>
+      <nav class="container">
+        <div class="nav-wrapper">
+          <!-- Logo -->
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 40 40" fill="currentColor">
+              <path d="M20 2L35 15v20L20 38L5 35V15L20 2z" />
+              <path d="M20 8L28 18v14l-8 6-8-6V18l8-10z" fill="white" />
+              <circle cx="20" cy="20" r="3" fill="currentColor" />
+            </svg>
+            <span class="logo-text">PahiloPaila</span>
+          </div>
+
+          <!-- Navigation Links -->
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li>
+              <a href="guide_marketplace.html" class="active">Guides</a>
+            </li>
+            <li><a href="travel_stories.html">Travel Stories</a></li>
+            <li><a href="discover.html">AI Guide</a></li>
+          </ul>
+
+          <!-- Mobile Menu Button -->
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <!-- Page Header -->
+        <section class="page-header">
+          <h1>Discover Authentic Nepal Guides</h1>
+          <p>
+            Connect with certified local experts who know Nepal's hidden gems.
+            Filter by region, expertise, and experience to find your perfect
+            cultural guide.
+          </p>
+          <div style="margin-top: 20px; text-align: center">
+            <button
+              id="registerGuideBtn"
+              class="btn-primary"
+              style="padding: 12px 24px; font-size: 1rem"
+            >
+              Register as Guide
+            </button>
+          </div>
+        </section>
+
+        <!-- Search and Filter Bar -->
+        <section class="search-section">
+          <div class="search-bar">
+            <svg
+              class="search-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search guides, regions, or experiences..."
+              id="searchInput"
+            />
+          </div>
+
+          <div class="quick-filters">
+            <button class="filter-btn active">Trekking</button>
+            <button class="filter-btn">Cultural</button>
+            <button class="filter-btn">Photography</button>
+            <button class="filter-btn">Village Stay</button>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
+              </svg>
+            </button>
+            <button class="view-btn" id="listViewBtn">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <div class="content-layout">
+          <!-- Filter Sidebar -->
+          <aside class="sidebar">
+            <!-- Map View -->
+            <div class="card">
+              <h3>Guide Locations</h3>
+              <div id="map"></div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card">
+              <h3>Filters</h3>
+
+              <div class="filter-group">
+                <h4>Region</h4>
+                <label>
+                  <input type="checkbox" checked />
+                  <span>Everest Region (24)</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Annapurna Region (18)</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Langtang Region (12)</span>
+                </label>
+              </div>
+
+              <div class="filter-group">
+                <h4>Expertise</h4>
+                <label>
+                  <input type="checkbox" />
+                  <span>Trekking Guide (32)</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Cultural Expert (28)</span>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span>Photography Guide (15)</span>
+                </label>
+              </div>
+
+              <div class="filter-group">
+                <h4>Price Range (per day)</h4>
+                <div class="price-range">
+                  <input
+                    type="range"
+                    min="25"
+                    max="200"
+                    value="100"
+                    id="priceRange"
+                  />
+                  <div class="price-labels">
+                    <span>$25</span>
+                    <span>$200</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="clear-filters" id="clearFilters">
+                Clear All Filters
+              </button>
+            </div>
+          </aside>
+
+          <!-- Main Content Area -->
+          <section class="guides-section">
+            <!-- Results Header -->
+            <div class="results-header">
+              <p>Showing <strong>1-6</strong> of <strong>47</strong> guides</p>
+              <select class="sort-select">
+                <option>Best Match</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Rating</option>
+              </select>
+            </div>
+
+            <!-- Guide Grid -->
+            <div class="guides-grid" id="guidesGrid">
+              <!-- Guide Card 1 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1720238281139-2a33162cca1a?w=400&h=300&fit=crop"
+                    alt="Pemba Sherpa"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge available">Available</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Pemba Sherpa</h3>
+                      <p class="guide-region">Everest Region • 12 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>4.9</span>
+                      <span class="reviews">(127)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Trekking</span>
+                    <span class="tag">Cultural</span>
+                    <span class="tag">Photography</span>
+                  </div>
+                  <p class="guide-description">
+                    Expert in high-altitude trekking with deep knowledge of
+                    Sherpa culture and traditions. Fluent in English, Nepali,
+                    and Tibetan.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 2h</span>
+                    <span>💬 English, Hindi</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$85</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Guide Card 2 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1727090474201-b8deaacf7e1e?w=400&h=300&fit=crop"
+                    alt="Maya Gurung"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge busy">Busy</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Maya Gurung</h3>
+                      <p class="guide-region">Annapurna Region • 8 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>4.8</span>
+                      <span class="reviews">(89)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Cultural</span>
+                    <span class="tag">Village Stay</span>
+                  </div>
+                  <p class="guide-description">
+                    Specialist in Gurung culture and traditional village life.
+                    Expert in local handicrafts and authentic cultural
+                    experiences.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 4h</span>
+                    <span>💬 English, German</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$65</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Guide Card 3 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1640937499617-f4139b1596ad?w=400&h=300&fit=crop"
+                    alt="Rajesh Tamang"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge available">Available</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn active">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Rajesh Tamang</h3>
+                      <p class="guide-region">Langtang Region • 15 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>5.0</span>
+                      <span class="reviews">(156)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Photography</span>
+                    <span class="tag">Wildlife</span>
+                    <span class="tag">Trekking</span>
+                  </div>
+                  <p class="guide-description">
+                    Professional wildlife photographer and guide. Expert in
+                    capturing Nepal's biodiversity and leading photography
+                    expeditions.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 1h</span>
+                    <span>💬 English, French</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$120</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Guide Card 4 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1494900477229-bba1a2768f1e?w=400&h=300&fit=crop"
+                    alt="Karma Lama"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge available">Available</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Karma Lama</h3>
+                      <p class="guide-region">Dolpo Region • 20 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>4.9</span>
+                      <span class="reviews">(73)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Spiritual</span>
+                    <span class="tag">Meditation</span>
+                  </div>
+                  <p class="guide-description">
+                    Buddhist monk and spiritual guide specializing in meditation
+                    retreats and ancient Tibetan Buddhist practices.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 6h</span>
+                    <span>💬 English, Tibetan</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$95</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Guide Card 5 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1515175620159-0634b62d32f8?w=400&h=300&fit=crop"
+                    alt="Sita Rai"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge busy">Busy</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Sita Rai</h3>
+                      <p class="guide-region">Eastern Hills • 10 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>4.7</span>
+                      <span class="reviews">(94)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Cooking</span>
+                    <span class="tag">Homestay</span>
+                  </div>
+                  <p class="guide-description">
+                    Expert in traditional Nepali cooking and authentic village
+                    homestay experiences. Specializes in organic farming.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 3h</span>
+                    <span>💬 English, Hindi</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$45</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Guide Card 6 -->
+              <article class="guide-card">
+                <div class="guide-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1583300418584-8332e32b710e?w=400&h=300&fit=crop"
+                    alt="Binod Thapa"
+                  />
+                  <div class="guide-badges">
+                    <span class="badge available">Available</span>
+                    <span class="badge verified">Verified</span>
+                  </div>
+                  <button class="favorite-btn">❤</button>
+                </div>
+                <div class="guide-info">
+                  <div class="guide-header">
+                    <div>
+                      <h3>Binod Thapa</h3>
+                      <p class="guide-region">Multiple Regions • 18 years</p>
+                    </div>
+                    <div class="rating">
+                      <span class="star">⭐</span>
+                      <span>4.8</span>
+                      <span class="reviews">(203)</span>
+                    </div>
+                  </div>
+                  <div class="tags">
+                    <span class="tag">Extreme</span>
+                    <span class="tag">Adventure</span>
+                  </div>
+                  <p class="guide-description">
+                    Extreme adventure specialist with mountaineering
+                    certifications. Expert in high-altitude climbing.
+                  </p>
+                  <div class="guide-meta">
+                    <span>🕐 Responds in 1h</span>
+                    <span>💬 English, Japanese</span>
+                  </div>
+                  <div class="guide-footer">
+                    <div class="price">
+                      <strong>$150</strong>
+                      <span>/day</span>
+                    </div>
+                    <div class="actions">
+                      <button class="btn-secondary compare-btn">Compare</button>
+                      <a href="#" class="btn-primary">View Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <button class="page-btn" disabled>‹</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span>...</span>
+              <button class="page-btn">8</button>
+              <button class="page-btn">›</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>PahiloPaila</h3>
+            <p>
+              Connecting travelers with authentic Nepali cultural experiences
+            </p>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="guide_marketplace.html">Find Guides</a></li>
+              <li><a href="travel_stories.html">Travel Stories</a></li>
+              <li><a href="discover.html">AI Guide</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 PahiloPaila. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Comparison Modal -->
+    <div class="modal" id="comparisonModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Compare Guides</h2>
+          <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Select guides to compare their profiles, pricing, and expertise.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Registration Modal -->
+    <div class="modal" id="registerGuideModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Register as Guide</h2>
+          <button class="modal-close" id="registerModalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="guideRegistrationForm">
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideName"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                id="guideName"
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideEmail"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="guideEmail"
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guidePassword"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="guidePassword"
+                required
+                minlength="6"
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideWebsite"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Website (optional)</label
+              >
+              <input
+                type="url"
+                id="guideWebsite"
+                placeholder="https://yourwebsite.com"
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Location</label
+              >
+              <button
+                type="button"
+                id="getLocationBtn"
+                class="btn-primary"
+                style="width: 100%; padding: 0.75rem; margin-bottom: 0.5rem"
+              >
+                📍 Get My Location
+              </button>
+              <div id="locationStatus" style="font-size: 0.9rem; color: #666; margin-top: 0.5rem"></div>
+              <input type="hidden" id="guideLatitude" required />
+              <input type="hidden" id="guideLongitude" required />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideExperience"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Years of Experience</label
+              >
+              <input
+                type="number"
+                id="guideExperience"
+                min="0"
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideExpertise"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Expertise/Services</label
+              >
+              <textarea
+                id="guideExpertise"
+                rows="3"
+                placeholder="e.g., Trekking, Cultural tours, Photography, Village stays..."
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              ></textarea>
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideLanguages"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Languages Spoken</label
+              >
+              <input
+                type="text"
+                id="guideLanguages"
+                placeholder="e.g., English, Nepali, Hindi, etc."
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideRate"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Daily Rate (USD)</label
+              >
+              <input
+                type="number"
+                id="guideRate"
+                min="0"
+                step="5"
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                for="guideBio"
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Short Bio</label
+              >
+              <textarea
+                id="guideBio"
+                rows="4"
+                placeholder="Tell us about yourself and what makes you a unique guide..."
+                required
+                style="
+                  width: 100%;
+                  padding: 0.75rem;
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 1rem;
+                "
+              ></textarea>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                justify-content: flex-end;
+                margin-top: 1.5rem;
+              "
+            >
+              <button
+                type="button"
+                id="cancelRegisterBtn"
+                class="btn-secondary"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn-primary">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Toast Notification System -->
+    <script src="../JS/toast.js"></script>
+
+    <!-- Backend Authentication Guard -->
+    <script src="../JS/auth-guard.js"></script>
+
+    <script src="../JS/guide_marketplace.js"></script>
+  </body>
+</html>
