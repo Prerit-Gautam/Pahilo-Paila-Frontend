@@ -193,10 +193,11 @@ header.scrolled {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 0 5% 0 20px;
+  max-width: 100%;
+  margin: 0;
   height: 80px;
+  flex-wrap: nowrap;
 }
 
 .navbar > * {
@@ -296,8 +297,10 @@ header.scrolled .logo h1 {
   padding: 8px 12px;
   border-radius: 4px;
   display: flex;
+  white-space: nowrap;
   align-items: center;
   height: auto;
+  font-size: 1.1rem;
 }
 
 header.scrolled .nav-links a {
