@@ -252,3 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   document.head.appendChild(style);
 });
+
+// Authentication UI Management
+document.addEventListener("DOMContentLoaded", function () {
+  // The user profile is now directly in the HTML, so we don't need to create it dynamically
+  // This prevents conflicts with the HTML structure
+});

@@ -22,7 +22,7 @@
     <header>
       <nav class="navbar">
         <div class="logo">
-          <h1>PahiloPaila</h1>
+          <a href="index.html"><h1>PahiloPaila</h1></a>
         </div>
         <div class="nav-links">
           <ul>
@@ -31,7 +31,53 @@
             <li><a href="travel_stories.html">Travel Stories</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#featured">Explore</a></li>
+            <!-- Mobile Authentication Buttons -->
+            <li class="mobile-auth-buttons">
+              <button
+                id="mobileLoginBtn"
+                class="btn secondary-btn"
+                style="width: 100%; margin-bottom: 10px"
+              >
+                Login
+              </button>
+              <button
+                id="mobileRegisterBtn"
+                class="btn primary-btn"
+                style="width: 100%"
+              >
+                Register
+              </button>
+            </li>
+            <!-- Mobile User Profile -->
+            <li
+              id="mobileUserProfile"
+              class="mobile-user-profile"
+              style="display: none; padding: 15px; text-align: center"
+            >
+              <div style="margin-bottom: 10px; color: var(--dark-color)">
+                Welcome, <span id="mobileUserEmail"></span>
+              </div>
+              <button
+                id="mobileLogoutBtn"
+                class="btn secondary-btn"
+                style="width: 100%"
+              >
+                Logout
+              </button>
+            </li>
           </ul>
+        </div>
+        <!-- Authentication Buttons -->
+        <div class="auth-buttons">
+          <button id="loginBtn" class="btn secondary-btn">Login</button>
+          <button id="registerBtn" class="btn primary-btn">Register</button>
+        </div>
+        <!-- User Profile (Hidden by default) -->
+        <div id="userProfile" class="user-profile" style="display: none">
+          <div class="user-info">
+            <span id="userEmail"></span>
+            <button id="logoutBtn" class="btn secondary-btn">Logout</button>
+          </div>
         </div>
         <div class="hamburger">
           <span class="bar"></span>
@@ -40,6 +86,71 @@
         </div>
       </nav>
     </header>
+
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="auth-form-container">
+          <div class="form-header">
+            <h2 id="formTitle">Welcome to PahiloPaila</h2>
+            <p id="formSubtitle">Sign in to continue your journey</p>
+          </div>
+
+          <div class="auth-tabs">
+            <button id="loginTab" class="tab-btn active">Login</button>
+            <button id="registerTab" class="tab-btn">Register</button>
+          </div>
+
+          <form id="authForm">
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <div
+              class="input-group"
+              id="confirmPasswordGroup"
+              style="display: none"
+            >
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+              />
+            </div>
+
+            <button type="submit" class="btn primary-btn auth-submit-btn">
+              Continue
+            </button>
+          </form>
+
+          <div class="auth-footer">
+            <p>
+              By continuing, you agree to our
+              <a href="#">Terms of Service</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <main>
       <section class="hero">
@@ -669,5 +780,8 @@
     </footer>
 
     <script src="../JS/index.js"></script>
+
+    <!-- Firebase Authentication -->
+    <script type="module" src="../JS/firebase-auth.js"></script>
   </body>
 </html>
