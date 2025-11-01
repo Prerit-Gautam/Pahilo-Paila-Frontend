@@ -10,6 +10,9 @@ const placeName = document.getElementById("placeName");
 const placeDescription = document.getElementById("placeDescription");
 const matchExplanation = document.getElementById("matchExplanation");
 
+// Navigation buttons
+const navButtons = document.querySelectorAll(".nav-btn");
+
 // Event Listeners
 sendButton.addEventListener("click", handleUserMessage);
 userInput.addEventListener("keypress", (e) => {
@@ -44,6 +47,35 @@ document
     userInput.value = "Suggest activities for a cultural tour in Nepal";
     handleUserMessage();
   });
+
+// Navigation button event listeners
+navButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Remove active class from all buttons
+    navButtons.forEach((btn) => btn.classList.remove("active"));
+    // Add active class to clicked button
+    button.classList.add("active");
+
+    // Get the tab type
+    const tabType = button.getAttribute("data-tab");
+
+    // Handle tab switching logic here if needed
+    switch (tabType) {
+      case "events":
+        // Show only events section
+        break;
+      case "activities":
+        // Show only activities section
+        break;
+      case "place-info":
+        // Show only place info section
+        break;
+      case "all":
+        // Show all sections
+        break;
+    }
+  });
+});
 
 // Add hover effects to all action buttons
 document.querySelectorAll(".action-btn, .suggestion-btn").forEach((button) => {
@@ -255,12 +287,25 @@ function updateActivitiesSection() {
   `;
 }
 
+// Function to process URL parameters
+function processUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("query");
+
+  if (query) {
+    // Set the query in the input field
+    userInput.value = query;
+    // Process the query
+    handleUserMessage();
+  }
+}
+
 // Initialize the chat with a welcome message
 document.addEventListener("DOMContentLoaded", () => {
   // Add initial bot message with animation
   setTimeout(() => {
     addMessageToChat(
-      "Hello! I'm your AI travel assistant for Nepal. I can help you discover authentic experiences, find local guides, recommend activities, and provide information about cultural events. What would you like to know?",
+      "Hello! I'm your AI travel guide for Nepal. I can help you discover authentic experiences, find local guides, recommend activities, and provide information about cultural events. What would you like to know?",
       "bot"
     );
   }, 500);
@@ -272,4 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
       button.style.transform = "translateY(0)";
     }, 1000 + index * 200);
   });
+
+  // Process URL parameters if any
+  processUrlParams();
 });

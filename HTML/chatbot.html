@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Travel Assistant - PahiloPaila</title>
+    <title>AI Travel Guide - PahiloPaila</title>
     <link rel="stylesheet" href="../CSS/chatbot.css" />
     <link
       rel="stylesheet"
@@ -27,7 +27,7 @@
             <li><a href="guide_marketplace.html">Guides</a></li>
             <li><a href="travel_stories.html">Travel Stories</a></li>
             <li><a href="discover.html">AI Guide</a></li>
-            <li><a href="chatbot.html" class="active">AI Assistant</a></li>
+            <li><a href="chatbot.html" class="active">AI Guide</a></li>
           </ul>
         </div>
         <div class="hamburger">
@@ -38,10 +38,34 @@
       </nav>
     </header>
 
+    <!-- Top Navigation Buttons -->
+    <section class="top-navigation">
+      <div class="container">
+        <div class="nav-buttons">
+          <button class="nav-btn active" data-tab="events">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Events</span>
+          </button>
+          <button class="nav-btn" data-tab="activities">
+            <i class="fas fa-hiking"></i>
+            <span>Activities</span>
+          </button>
+          <button class="nav-btn" data-tab="place-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Place Info</span>
+          </button>
+          <button class="nav-btn" data-tab="all">
+            <i class="fas fa-th-large"></i>
+            <span>All</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
-        <h1>Your AI Travel Assistant</h1>
+        <h1>Your AI Travel Guide</h1>
         <p>
           Discover Nepal's hidden gems with our intelligent travel companion
         </p>
@@ -52,7 +76,7 @@
       <section class="chatbot-section">
         <div class="container">
           <div class="section-header">
-            <h1>Chat with Our AI Assistant</h1>
+            <h1>Chat with Our AI Guide</h1>
             <p>
               Ask me anything about Nepal's hidden gems, cultural experiences,
               and local guides
@@ -66,8 +90,8 @@
                 <div class="message bot-message">
                   <div class="message-content">
                     <p>
-                      Hello! I'm your AI travel assistant for Nepal. I can help
-                      you discover authentic experiences, find local guides,
+                      Hello! I'm your AI travel guide for Nepal. I can help you
+                      discover authentic experiences, find local guides,
                       recommend activities, and provide information about
                       cultural events. What would you like to know?
                     </p>
