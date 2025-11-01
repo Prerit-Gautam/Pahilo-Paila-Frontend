@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PahiloPaila - Discover Rural Nepal</title>
     <link rel="stylesheet" href="../CSS/index.css" />
+    <link rel="stylesheet" href="../CSS/toast.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -56,6 +57,15 @@
           </div>
 
           <form id="authForm">
+            <div class="input-group" id="nameGroup" style="display: none">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+              />
+            </div>
+
             <div class="input-group">
               <label for="email">Email Address</label>
               <input
@@ -89,7 +99,7 @@
               />
             </div>
 
-            <button type="submit" class="btn primary-btn auth-submit-btn">
+            <button type="submit" class="btn primary-btn auth-submit-btn" >
               Continue
             </button>
           </form>
@@ -966,7 +976,10 @@
 
     <script src="../JS/index.js"></script>
 
-    <!-- Firebase Authentication -->
-    <script type="module" src="../JS/firebase-auth.js"></script>
+    <!-- Toast Notification System -->
+    <script src="../JS/toast.js"></script>
+
+    <!-- Backend Authentication -->
+    <script src="../JS/backend-auth.js"></script>
   </body>
 </html>

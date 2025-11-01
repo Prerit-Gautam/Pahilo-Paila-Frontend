@@ -171,6 +171,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const dotsContainer = document.querySelector(".slider-dots");
   const prevBtn = document.querySelector(".prev-btn");
   const nextBtn = document.querySelector(".next-btn");
+
+  // Exit if required elements are not found
+  if (!slides.length || !dotsContainer || !prevBtn || !nextBtn) {
+    return;
+  }
+
   let currentSlide = 0;
 
   // Create dots
