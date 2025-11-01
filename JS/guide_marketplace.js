@@ -213,10 +213,91 @@ document.addEventListener("DOMContentLoaded", function () {
     "guideRegistrationForm"
   );
 
+  // Function to get user location
+  function getUserLocation() {
+    const getLocationBtn = document.getElementById("getLocationBtn");
+    const locationStatus = document.getElementById("locationStatus");
+    const guideLatitude = document.getElementById("guideLatitude");
+    const guideLongitude = document.getElementById("guideLongitude");
+
+    if (!getLocationBtn) return;
+
+    // Check if geolocation is supported
+    if (!navigator.geolocation) {
+      locationStatus.textContent = "Geolocation is not supported by your browser.";
+      locationStatus.style.color = "#dc3545";
+      return;
+    }
+
+    // Show loading state
+    getLocationBtn.disabled = true;
+    getLocationBtn.textContent = "📍 Getting Location...";
+    locationStatus.textContent = "Requesting location permission...";
+    locationStatus.style.color = "#666";
+
+    // Get current position
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        // Success
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        guideLatitude.value = latitude;
+        guideLongitude.value = longitude;
+
+        locationStatus.textContent = `✓ Location captured: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+        locationStatus.style.color = "#28a745";
+        getLocationBtn.textContent = "✓ Location Captured";
+        getLocationBtn.disabled = false;
+      },
+      function (error) {
+        // Error
+        let errorMessage = "";
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = "Location permission denied. Please enable location access.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = "Location information unavailable.";
+            break;
+          case error.TIMEOUT:
+            errorMessage = "Location request timed out.";
+            break;
+          default:
+            errorMessage = "An unknown error occurred.";
+            break;
+        }
+        locationStatus.textContent = errorMessage;
+        locationStatus.style.color = "#dc3545";
+        getLocationBtn.textContent = "📍 Try Again";
+        getLocationBtn.disabled = false;
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  }
+
   // Open registration modal
   if (registerGuideBtn) {
     registerGuideBtn.addEventListener("click", function () {
       registerModal.classList.add("active");
+
+      // Automatically request location when modal opens
+      setTimeout(() => {
+        getUserLocation();
+      }, 500);
+    });
+  }
+
+  // Get Location Button - manual retry
+  const getLocationBtn = document.getElementById("getLocationBtn");
+
+  if (getLocationBtn) {
+    getLocationBtn.addEventListener("click", function () {
+      getUserLocation();
     });
   }
 
@@ -245,39 +326,97 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle form submission
   if (guideRegistrationForm) {
-    guideRegistrationForm.addEventListener("submit", function (e) {
+    guideRegistrationForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       // Get form data
+      const name = document.getElementById("guideName").value;
+      const email = document.getElementById("guideEmail").value;
+      const password = document.getElementById("guidePassword").value;
+      const website = document.getElementById("guideWebsite").value || "";
+      const latitude = parseFloat(document.getElementById("guideLatitude").value);
+      const longitude = parseFloat(document.getElementById("guideLongitude").value);
+      const languagesInput = document.getElementById("guideLanguages").value;
+      const rate = parseInt(document.getElementById("guideRate").value);
+
+      // Parse languages from comma-separated string to array
+      const languages = languagesInput.split(',').map(lang => lang.trim());
+
+      // Prepare data for backend
       const guideData = {
-        name: document.getElementById("guideName").value,
-        email: document.getElementById("guideEmail").value,
-        phone: document.getElementById("guidePhone").value,
-        location: document.getElementById("guideLocation").value,
-        experience: document.getElementById("guideExperience").value,
-        expertise: document.getElementById("guideExpertise").value,
-        languages: document.getElementById("guideLanguages").value,
-        rate: document.getElementById("guideRate").value,
-        bio: document.getElementById("guideBio").value,
+        name: name,
+        email: email,
+        password: password,
+        website: website,
+        latitude: latitude,
+        longitude: longitude,
+        languages: languages,
+        rate: rate
       };
 
-      // Add to registered guides array
-      registeredGuides.push(guideData);
+      // Disable submit button
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Registering...";
+      }
 
-      // Add guide to the display
-      addGuideToDisplay(guideData);
+      try {
+        // Send registration request to backend
+        const response = await fetch('http://localhost:8080/pahilopaila/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(guideData)
+        });
 
-      // In a real application, this would send data to a server
-      console.log("Guide registration data:", guideData);
+        const result = await response.json();
 
-      // Show success message
-      alert(
-        "Thank you for registering as a guide! Your information has been submitted successfully."
-      );
+        if (result.success) {
+          // Registration successful
+          if (window.toast) {
+            window.toast.success(result.message || "Your guide profile has been created successfully!", "Registration Successful");
+          } else {
+            alert(result.message || "Thank you for registering as a guide! Your information has been submitted successfully.");
+          }
 
-      // Reset form and close modal
-      guideRegistrationForm.reset();
-      registerModal.classList.remove("active");
+          // Store user data in localStorage
+          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('userEmail', result.user.email);
+          localStorage.setItem('userName', result.user.name);
+          localStorage.setItem('userId', result.user.id);
+
+          // Reset form and close modal
+          guideRegistrationForm.reset();
+          registerModal.classList.remove("active");
+
+          // Optionally redirect to profile or home page
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1500);
+        } else {
+          // Registration failed
+          if (window.toast) {
+            window.toast.error(result.message || "Registration failed. Please try again.", "Registration Failed");
+          } else {
+            alert(result.message || "Registration failed. Please try again.");
+          }
+        }
+      } catch (error) {
+        console.error("Guide registration error:", error);
+        if (window.toast) {
+          window.toast.error("Network error. Please check your connection and try again.", "Connection Error");
+        } else {
+          alert("Network error. Please check your connection and try again.");
+        }
+      } finally {
+        // Re-enable submit button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Register";
+        }
+      }
     });
   }
 

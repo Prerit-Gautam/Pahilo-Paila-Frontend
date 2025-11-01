@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guide Marketplace - PahiloPaila</title>
     <link rel="stylesheet" href="../CSS/guide_marketplace.css" />
+    <link rel="stylesheet" href="../CSS/toast.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -616,14 +617,15 @@
 
             <div style="margin-bottom: 1rem">
               <label
-                for="guidePhone"
+                for="guidePassword"
                 style="display: block; margin-bottom: 0.5rem; font-weight: 500"
-                >Phone Number</label
+                >Password</label
               >
               <input
-                type="tel"
-                id="guidePhone"
+                type="password"
+                id="guidePassword"
                 required
+                minlength="6"
                 style="
                   width: 100%;
                   padding: 0.75rem;
@@ -636,14 +638,14 @@
 
             <div style="margin-bottom: 1rem">
               <label
-                for="guideLocation"
+                for="guideWebsite"
                 style="display: block; margin-bottom: 0.5rem; font-weight: 500"
-                >Location/Region</label
+                >Website (optional)</label
               >
               <input
-                type="text"
-                id="guideLocation"
-                required
+                type="url"
+                id="guideWebsite"
+                placeholder="https://yourwebsite.com"
                 style="
                   width: 100%;
                   padding: 0.75rem;
@@ -652,6 +654,24 @@
                   font-size: 1rem;
                 "
               />
+            </div>
+
+            <div style="margin-bottom: 1rem">
+              <label
+                style="display: block; margin-bottom: 0.5rem; font-weight: 500"
+                >Location</label
+              >
+              <button
+                type="button"
+                id="getLocationBtn"
+                class="btn-primary"
+                style="width: 100%; padding: 0.75rem; margin-bottom: 0.5rem"
+              >
+                📍 Get My Location
+              </button>
+              <div id="locationStatus" style="font-size: 0.9rem; color: #666; margin-top: 0.5rem"></div>
+              <input type="hidden" id="guideLatitude" required />
+              <input type="hidden" id="guideLongitude" required />
             </div>
 
             <div style="margin-bottom: 1rem">
@@ -784,8 +804,11 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Firebase Authentication Guard -->
-    <script type="module" src="../JS/auth-guard.js"></script>
+    <!-- Toast Notification System -->
+    <script src="../JS/toast.js"></script>
+
+    <!-- Backend Authentication Guard -->
+    <script src="../JS/auth-guard.js"></script>
 
     <script src="../JS/guide_marketplace.js"></script>
   </body>
