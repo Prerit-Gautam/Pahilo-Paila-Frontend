@@ -9,14 +9,15 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
-// TODO: Replace with your actual Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyC8C-vVb17JoWayGtZT7QQEk1uqsm04v6Q",
+  authDomain: "blood-bank-auth.firebaseapp.com",
+  databaseURL: "https://blood-bank-auth-default-rtdb.firebaseio.com",
+  projectId: "blood-bank-auth",
+  storageBucket: "blood-bank-auth.firebasestorage.app",
+  messagingSenderId: "909421800976",
+  appId: "1:909421800976:web:007f21257147bd8f4c6495",
+  measurementId: "G-S707QP5CC1"
 };
 
 // Initialize Firebase
@@ -218,6 +219,10 @@ onAuthStateChanged(auth, (user) => {
     if (authButtons) authButtons.style.display = "none";
     if (userProfile) userProfile.style.display = "flex";
     if (mobileUserProfile) mobileUserProfile.style.display = "block";
+
+    // Store auth state in sessionStorage for other pages
+    sessionStorage.setItem('isAuthenticated', 'true');
+    sessionStorage.setItem('userEmail', user.email);
   } else {
     // User is signed out
     console.log("User is signed out");
@@ -225,7 +230,62 @@ onAuthStateChanged(auth, (user) => {
     if (authButtons) authButtons.style.display = "flex";
     if (userProfile) userProfile.style.display = "none";
     if (mobileUserProfile) mobileUserProfile.style.display = "none";
+
+    // Clear auth state from sessionStorage
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('userEmail');
+
+    // Check if current page requires authentication
+    checkAuthRequirement();
   }
 });
 
-export { auth };
+// Function to check if user needs to be authenticated for current page
+function checkAuthRequirement() {
+  const currentPage = window.location.pathname;
+  const protectedPages = [
+    'guide_marketplace.html',
+    'travel_stories.html',
+    'discover.html'
+  ];
+
+  const isProtectedPage = protectedPages.some(page => currentPage.includes(page));
+
+  if (isProtectedPage && !auth.currentUser) {
+    // Show authentication modal or redirect to home
+    const shouldRedirect = confirm(
+      'You must be logged in to access this feature. Would you like to go to the home page to sign in?'
+    );
+
+    if (shouldRedirect) {
+      window.location.href = 'index.html';
+    }
+  }
+}
+
+// Function to check authentication before performing actions
+function requireAuth(callback) {
+  return function(...args) {
+    if (!auth.currentUser) {
+      alert('Please log in to perform this action.');
+      if (authModal) {
+        authModal.style.display = 'block';
+        showLoginForm();
+      }
+      return false;
+    }
+    return callback.apply(this, args);
+  };
+}
+
+// Function to get current user
+function getCurrentUser() {
+  return auth.currentUser;
+}
+
+// Function to check if user is authenticated
+function isAuthenticated() {
+  return auth.currentUser !== null;
+}
+
+export { auth, requireAuth, getCurrentUser, isAuthenticated };
