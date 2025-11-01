@@ -1,5 +1,5 @@
 // Backend Authentication Module
-const API_BASE_URL = 'http://localhost:8080/pahilopaila';
+const API_BASE_URL = 'https://pahilopaila-backend-demo.onrender.com/pahilopaila';
 
 // DOM Elements
 const loginBtn = document.getElementById("loginBtn");

@@ -690,7 +690,26 @@ header {
   color: #555;
 }
 
-.guides-container,
+/* Guides Carousel Wrapper */
+.guides-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.guides-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.guides-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 .events-container,
 .activities-container {
   min-height: 100px;
@@ -702,21 +721,65 @@ header {
   color: #7f8c8d;
   text-align: center;
   padding: 20px 0;
+  width: 100%;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.carousel-btn:hover {
+  background: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.carousel-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.carousel-btn:disabled:hover {
+  transform: scale(1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Guide Items */
 .guide-item {
+  min-width: 300px;
+  flex-shrink: 0;
   padding: 25px;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   transition: var(--transition);
-}
-
-.guide-item:last-child {
-  border-bottom: none;
+  background: white;
 }
 
 .guide-item:hover {
-  background: #f8fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .guide-item h4 {

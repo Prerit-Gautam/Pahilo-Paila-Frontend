@@ -210,6 +210,22 @@ function updateGuidesSection() {
       <p class="guide-price">$75/day</p>
       <button class="btn">View Profile</button>
     </div>
+    <div class="guide-item">
+      <h4>Sunita Rai</h4>
+      <p class="guide-detail"><i class="fas fa-star"></i> 4.7 (94 reviews)</p>
+      <p class="guide-detail"><i class="fas fa-map-marker-alt"></i> Pokhara Region</p>
+      <p class="guide-detail"><i class="fas fa-comment"></i> English, Hindi</p>
+      <p class="guide-price">$50/day</p>
+      <button class="btn">View Profile</button>
+    </div>
+    <div class="guide-item">
+      <h4>Pemba Sherpa</h4>
+      <p class="guide-detail"><i class="fas fa-star"></i> 5.0 (203 reviews)</p>
+      <p class="guide-detail"><i class="fas fa-map-marker-alt"></i> Everest Region</p>
+      <p class="guide-detail"><i class="fas fa-comment"></i> English, Tibetan</p>
+      <p class="guide-price">$95/day</p>
+      <button class="btn">View Profile</button>
+    </div>
   `;
 }
 
@@ -255,6 +271,60 @@ function updateActivitiesSection() {
   `;
 }
 
+// Guides Carousel Functionality
+function initGuidesCarousel() {
+  const guidesContainer = document.getElementById("guidesContainer");
+  const prevBtn = document.getElementById("guidesPrev");
+  const nextBtn = document.getElementById("guidesNext");
+
+  if (!guidesContainer || !prevBtn || !nextBtn) {
+    return;
+  }
+
+  // Scroll amount (one card width + gap)
+  const scrollAmount = 320;
+
+  // Prev button click
+  prevBtn.addEventListener("click", () => {
+    guidesContainer.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
+    });
+  });
+
+  // Next button click
+  nextBtn.addEventListener("click", () => {
+    guidesContainer.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  });
+
+  // Update button states based on scroll position
+  function updateButtonStates() {
+    const isAtStart = guidesContainer.scrollLeft <= 0;
+    const isAtEnd =
+      guidesContainer.scrollLeft + guidesContainer.clientWidth >=
+      guidesContainer.scrollWidth - 1;
+
+    prevBtn.disabled = isAtStart;
+    nextBtn.disabled = isAtEnd;
+  }
+
+  // Listen to scroll events
+  guidesContainer.addEventListener("scroll", updateButtonStates);
+
+  // Initial button state
+  updateButtonStates();
+
+  // Update button states when guides are loaded
+  const observer = new MutationObserver(updateButtonStates);
+  observer.observe(guidesContainer, {
+    childList: true,
+    subtree: true,
+  });
+}
+
 // Initialize the chat with a welcome message
 document.addEventListener("DOMContentLoaded", () => {
   // Add initial bot message with animation
@@ -272,4 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
       button.style.transform = "translateY(0)";
     }, 1000 + index * 200);
   });
+
+  // Initialize guides carousel
+  initGuidesCarousel();
 });
