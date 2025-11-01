@@ -1003,75 +1003,65 @@ footer::before {
 }
 
 .footer-content {
-  display: grid;
-  grid-template-columns: 1.5fr 2fr;
-  gap: 60px;
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  padding-bottom: 40px;
-}
-
-.footer-about h3 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: var(--white);
-}
-
-.footer-about p {
-  margin-bottom: 25px;
-  opacity: 0.9;
-  line-height: 1.7;
-}
-
-.footer-links {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.footer-column h4 {
-  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.footer-brand h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
   color: var(--white);
 }
 
-.footer-column ul {
-  list-style: none;
+.footer-brand p {
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+  font-size: 0.9rem;
 }
 
-.footer-column ul li {
-  margin-bottom: 12px;
+.footer-links ul {
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
 }
 
-.footer-column ul li a {
+.footer-links li {
+  margin: 0;
+}
+
+.footer-links a {
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
   display: inline-block;
+  padding: 5px 0;
+  font-size: 0.95rem;
 }
 
-.footer-column ul li a:hover {
+.footer-links a:hover {
   color: var(--secondary-color);
-  transform: translateX(5px);
+  transform: translateY(-2px);
 }
 
 .social-icons {
-  display: flex;
-  gap: 20px;
+  display: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 20px;
 }
 
-.social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
+.footer-bottom p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.85rem;
 }
 
 /* Authentication Buttons */

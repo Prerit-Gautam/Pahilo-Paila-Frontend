@@ -1,43 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gemini Search</title>
-  <link rel="stylesheet" href="../CSS/discover.css" />
-</head>
-<body>
-  <h2>Gemini Search (Nepal Locations)</h2>
-  <div id="controls">
-    <input type="text" id="query" placeholder="Ask something about Nepal..." />
-    <button id="searchBtn">Search</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Guide - PahiloPaila</title>
+    <link rel="stylesheet" href="../CSS/discover.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"><h1>PahiloPaila</h1></a>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="guide_marketplace.html">Guides</a></li>
+            <li><a href="travel_stories.html">Travel Stories</a></li>
+            <li><a href="discover.html" class="active">AI Guide</a></li>
+          </ul>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
 
-  <!-- Removed Coordinates button; keep other buttons -->
-  <div id="buttonContainer">
-    <button id="eventsBtn" disabled>Events</button>
-    <button id="activitiesBtn" disabled>Activities</button>
-    <button id="noteBtn" disabled>Name of place</button>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>AI-Powered Discovery</h1>
+        <p>
+          Ask our AI guide to help you discover Nepal's hidden gems and
+          authentic experiences
+        </p>
+      </div>
+    </section>
 
-  <div id="buttonOutput">
-    Click a button above to see specific data.
-  </div>
+    <main>
+      <section class="discover-section">
+        <div class="container">
+          <div class="section-header">
+            <h1>Explore Nepal with AI</h1>
+            <p>
+              Our intelligent assistant helps you find the perfect destinations,
+              guides, and experiences
+            </p>
+          </div>
 
-<<<<<<< HEAD
-  <!-- Firebase Authentication Guard -->
-  <script type="module" src="../JS/auth-guard.js"></script>
-=======
-  <!-- Guides area (shown automatically after search if guides exist) -->
-  <div id="guidesWrapper" class="hidden">
-    <button id="scrollLeft" class="scrollBtn" aria-label="Scroll left">◀</button>
-    <div id="guidesViewport">
-      <div id="guidesContainer" class="horizontal-list"></div>
-    </div>
-    <button id="scrollRight" class="scrollBtn" aria-label="Scroll right">▶</button>
-  </div>
->>>>>>> 740cc85e69b87f958ef36bf9659282b12b36ea9f
+          <div class="discover-content">
+            <h2><i class="fas fa-robot"></i> Gemini Search</h2>
+            <div id="controls">
+              <input
+                type="text"
+                id="query"
+                placeholder="Ask about places, guides, activities, events..."
+              />
+              <button id="searchBtn">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
 
-  <script src="../JS/discover.js"></script>
-</body>
+            <!-- Removed Coordinates button; keep other buttons -->
+            <div id="buttonContainer">
+              <button id="eventsBtn" disabled>
+                <i class="fas fa-calendar-alt"></i> Events
+              </button>
+              <button id="activitiesBtn" disabled>
+                <i class="fas fa-hiking"></i> Activities
+              </button>
+              <button id="noteBtn" disabled>
+                <i class="fas fa-map-marker-alt"></i> Place Info
+              </button>
+            </div>
+
+            <div id="buttonOutput">
+              Click a button above to see specific data.
+            </div>
+
+            <!-- Guides area (shown automatically after search if guides exist) -->
+            <div id="guidesWrapper" class="hidden">
+              <button
+                id="scrollLeft"
+                class="scrollBtn"
+                aria-label="Scroll left"
+              >
+                ◀
+              </button>
+              <div id="guidesViewport">
+                <div id="guidesContainer" class="horizontal-list"></div>
+              </div>
+              <button
+                id="scrollRight"
+                class="scrollBtn"
+                aria-label="Scroll right"
+              >
+                ▶
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>PahiloPaila</h3>
+            <p>Discover Rural Nepal with Local Experts</p>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="guide_marketplace.html">Find Guides</a></li>
+              <li><a href="travel_stories.html">Travel Stories</a></li>
+              <li><a href="discover.html">AI Guide</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 PahiloPaila. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Firebase Authentication Guard -->
+    <script type="module" src="../JS/auth-guard.js"></script>
+    <script src="../JS/discover.js"></script>
+  </body>
 </html>
