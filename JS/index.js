@@ -257,4 +257,97 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   // The user profile is now directly in the HTML, so we don't need to create it dynamically
   // This prevents conflicts with the HTML structure
+
+  // Authentication modal open/close and tab handling
+  (function () {
+    const authModal = document.getElementById("authModal");
+    if (!authModal) return;
+
+    const loginBtnMain = document.getElementById("loginBtn");
+    const registerBtnMain = document.getElementById("registerBtn");
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const mobileRegisterBtn = document.getElementById("mobileRegisterBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+    const closeBtn = authModal.querySelector(".close");
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const confirmPasswordGroup = document.getElementById("confirmPasswordGroup");
+    const formTitle = document.getElementById("formTitle");
+    const formSubtitle = document.getElementById("formSubtitle");
+    const modalContent = authModal.querySelector(".modal-content");
+
+    function openAuthModal(mode = "login") {
+      authModal.style.display = "block";
+      document.body.classList.add("modal-open");
+      // reset scroll inside modal
+      if (modalContent) modalContent.scrollTop = 0;
+
+      if (mode === "register") {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        confirmPasswordGroup.style.display = "block";
+        formTitle.textContent = "Create your account";
+        formSubtitle.textContent = "Register to get started";
+      } else {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        confirmPasswordGroup.style.display = "none";
+        formTitle.textContent = "Welcome to PahiloPaila";
+        formSubtitle.textContent = "Sign in to continue your journey";
+      }
+
+      // focus first input in modal after open
+      setTimeout(() => {
+        const firstInput = authModal.querySelector(".auth-form-container input");
+        if (firstInput) firstInput.focus();
+      }, 250);
+    }
+
+    function closeAuthModal() {
+      authModal.style.display = "none";
+      document.body.classList.remove("modal-open");
+    }
+
+    // Buttons that open the modal
+    if (loginBtnMain) loginBtnMain.addEventListener("click", () => openAuthModal("login"));
+    if (registerBtnMain) registerBtnMain.addEventListener("click", () => openAuthModal("register"));
+    if (mobileLoginBtn) mobileLoginBtn.addEventListener("click", () => openAuthModal("login"));
+    if (mobileRegisterBtn) mobileRegisterBtn.addEventListener("click", () => openAuthModal("register"));
+
+    // Close button and clicking outside modal content closes it
+    if (closeBtn) closeBtn.addEventListener("click", closeAuthModal);
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) closeAuthModal();
+    });
+
+    // Tab switching inside modal
+    if (loginTab) {
+      loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        confirmPasswordGroup.style.display = "none";
+        formTitle.textContent = "Welcome to PahiloPaila";
+        formSubtitle.textContent = "Sign in to continue your journey";
+        // keep modal visible and reset scroll to top of modal content
+        if (modalContent) modalContent.scrollTop = 0;
+      });
+    }
+    if (registerTab) {
+      registerTab.addEventListener("click", () => {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        confirmPasswordGroup.style.display = "block";
+        formTitle.textContent = "Create your account";
+        formSubtitle.textContent = "Register to get started";
+        if (modalContent) modalContent.scrollTop = 0;
+      });
+    }
+
+    // Optional: close modal on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && authModal.style.display === "block") {
+        closeAuthModal();
+      }
+    });
+  })();
 });

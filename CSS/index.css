@@ -1090,12 +1090,15 @@ footer::before {
 }
 
 /* User Profile */
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  height: 100%;
+  .user-profile {
+  position: absolute;
+  top: 1rem;        /* adjust as needed */
+  right: 2rem;      /* space from right edge */
+  z-index: 1101;
+  padding-bottom: 2rem;
+  /* remove margin-right and translateX for absolute positioning */
 }
+
 
 .user-info {
   display: flex;
@@ -1106,6 +1109,28 @@ footer::before {
   border-radius: 30px;
   backdrop-filter: blur(10px);
   max-width: 350px;
+}
+
+/* make modal content scrollable and prevent background scroll when modal open */
+.modal-content {
+  background-color: var(--white);
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  max-height: 80vh; /* limit height */
+  overflow-y: auto; /* allow modal internal scrolling */
+}
+
+/* when modal is open, lock body scrolling */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
 }
 
 #userEmail {
@@ -1170,6 +1195,8 @@ header.scrolled #userEmail {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: slideIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  max-height: 80vh; /* limit height */
+  overflow-y: auto; /* allow modal internal scrolling */
 }
 
 @keyframes slideIn {
