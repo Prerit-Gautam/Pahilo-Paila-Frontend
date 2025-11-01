@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gemini Search</title>
-  <style href="../CSS/discover.css"></style>
+  <link rel="stylesheet" href="../CSS/discover.css" />
 </head>
 <body>
   <h2>Gemini Search (Nepal Locations)</h2>
@@ -12,10 +12,9 @@
     <input type="text" id="query" placeholder="Ask something about Nepal..." />
     <button id="searchBtn">Search</button>
   </div>
-      // New buttons for specific data retrieval
 
+  <!-- Removed Coordinates button; keep other buttons -->
   <div id="buttonContainer">
-    <button id="coordsBtn" disabled>Coordinates</button>
     <button id="eventsBtn" disabled>Events</button>
     <button id="activitiesBtn" disabled>Activities</button>
     <button id="noteBtn" disabled>Name of place</button>
@@ -23,6 +22,15 @@
 
   <div id="buttonOutput">
     Click a button above to see specific data.
+  </div>
+
+  <!-- Guides area (shown automatically after search if guides exist) -->
+  <div id="guidesWrapper" class="hidden">
+    <button id="scrollLeft" class="scrollBtn" aria-label="Scroll left">◀</button>
+    <div id="guidesViewport">
+      <div id="guidesContainer" class="horizontal-list"></div>
+    </div>
+    <button id="scrollRight" class="scrollBtn" aria-label="Scroll right">▶</button>
   </div>
 
   <script src="../JS/discover.js"></script>
