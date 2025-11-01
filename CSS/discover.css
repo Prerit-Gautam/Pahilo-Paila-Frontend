@@ -1,15 +1,41 @@
- body { font-family: sans-serif; padding: 20px; }
-    #controls { display: flex; gap: 10px; margin-bottom: 20px; }
-    #query { padding: 10px; width: 300px; }
-    #searchBtn { padding: 10px 15px; cursor: pointer; }
-    #buttonContainer { display: flex; gap: 10px; margin-top: 15px; }
-    #buttonContainer button { padding: 8px 12px; cursor: pointer; background-color: #f0f0f0; border: 1px solid #ccc; }
-    #buttonOutput { 
-      margin-top: 10px; 
-      padding: 10px; 
-      border: 1px solid #ddd; 
-      min-height: 20px; 
-      white-space: pre-wrap;
-      background-color: #e9ecef;
-    }
-    /*water*/
+body { font-family: sans-serif; padding: 20px; }
+#controls { display: flex; gap: 10px; margin-bottom: 20px; }
+#query { padding: 10px; width: 300px; }
+#searchBtn { padding: 10px 15px; cursor: pointer; }
+#buttonContainer { display: flex; gap: 10px; margin-top: 15px; }
+#buttonContainer button { padding: 8px 12px; cursor: pointer; background-color: #f0f0f0; border: 1px solid #ccc; }
+#buttonOutput {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  min-height: 20px;
+  white-space: pre-wrap;
+  background-color: #e9ecef;
+}
+
+/* Guides list styles */
+.hidden { display: none; }
+#guidesWrapper { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+#guidesViewport { overflow: hidden; width: calc(100% - 100px); } /* leave space for arrows */
+.horizontal-list { display: flex; gap: 12px; padding: 10px; transition: scroll-left 200ms ease; }
+.guide-card {
+  min-width: 240px;
+  max-width: 260px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guide-card h4 { margin: 0; font-size: 1rem; }
+.guide-meta { font-size: 0.9rem; color: #333; }
+.guide-actions { margin-top: auto; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.guide-actions a { text-decoration: none; color: #007bff; font-size: 0.9rem; }
+.scrollBtn {
+  width: 36px; height: 36px; border-radius: 6px; border: 1px solid #bbb;
+  background: #f7f7f7; cursor: pointer; display: flex; align-items:center; justify-content:center;
+}
+.scrollBtn:active { transform: translateY(1px); }
