@@ -1,3 +1,43 @@
+// Mobile Menu Toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const body = document.body;
+
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener("click", function () {
+      mobileMenu.classList.toggle("active");
+      mobileMenuToggle.classList.toggle("active");
+      body.style.overflow = mobileMenu.classList.contains("active")
+        ? "hidden"
+        : "";
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        mobileMenu.classList.remove("active");
+        mobileMenuToggle.classList.remove("active");
+        body.style.overflow = "";
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", function (event) {
+      if (
+        !mobileMenu.contains(event.target) &&
+        !mobileMenuToggle.contains(event.target) &&
+        mobileMenu.classList.contains("active")
+      ) {
+        mobileMenu.classList.remove("active");
+        mobileMenuToggle.classList.remove("active");
+        body.style.overflow = "";
+      }
+    });
+  }
+});
+
 document.getElementById("searchBtn").addEventListener("click", sendRequest);
 document.getElementById("query").addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendRequest();

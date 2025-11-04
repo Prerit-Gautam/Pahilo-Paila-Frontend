@@ -19,26 +19,43 @@
       <div class="loader"></div>
     </div>
 
-    <header>
+    <header class="main-header">
       <nav class="navbar">
-        <div class="logo">
-          <h1>PahiloPaila</h1>
+        <div class="nav-container">
+          <!-- Logo -->
+          <div class="logo">
+            <a href="index.html" class="logo-link">
+              <img src="../photo/name2.jpg" alt="PahiloPaila" class="logo-image">
+              <span class="logo-text">PahiloPaila</span>
+            </a>
+          </div>
+
+          <!-- Navigation Links -->
+          <div class="nav-links">
+            <ul class="nav-menu">
+              <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="guide_marketplace.html" class="nav-link">Guides</a></li>
+              <li class="nav-item"><a href="travel_stories.html" class="nav-link active">Stories</a></li>
+              <li class="nav-item"><a href="discover.html" class="nav-link">AI Guide</a></li>
+            </ul>
+          </div>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
         </div>
-        <div class="nav-links">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="guide_marketplace.html">Guides</a></li>
-            <li>
-              <a href="travel_stories.html" class="active">Travel Stories</a>
-            </li>
-            <li><a href="discover.html">AI Guide</a></li>
-            <li><a href="#">About Us</a></li>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+          <ul class="mobile-nav-list">
+            <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+            <li><a href="guide_marketplace.html" class="mobile-nav-link">Guides</a></li>
+            <li><a href="travel_stories.html" class="mobile-nav-link active">Stories</a></li>
+            <li><a href="discover.html" class="mobile-nav-link">AI Guide</a></li>
           </ul>
-        </div>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
         </div>
       </nav>
     </header>

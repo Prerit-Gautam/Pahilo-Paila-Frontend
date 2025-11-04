@@ -21,71 +21,70 @@
       <div class="loader"></div>
     </div>
 
-    <header>
+    <header class="main-header">
       <nav class="navbar">
-        <div class="logo">
-          <a href="index.html"><h1>PahiloPaila</h1></a>
+        <div class="nav-container">
+          <!-- Logo -->
+          <div class="logo">
+            <a href="index.html" class="logo-link">
+              <img src="../photo/2.jpg" alt="PahiloPaila" class="logo-image">
+              <span class="logo-text">PahiloPaila</span>
+            </a>
+          </div>
+
+          <!-- Navigation Links -->
+          <div class="nav-links">
+            <ul class="nav-menu">
+              <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+              <li class="nav-item"><a href="guide_marketplace.html" class="nav-link">Guides</a></li>
+              <li class="nav-item"><a href="travel_stories.html" class="nav-link">Stories</a></li>
+              <li class="nav-item"><a href="discover.html" class="nav-link">AI Guide</a></li>
+              <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="#featured" class="nav-link">Explore</a></li>
+            </ul>
+          </div>
+
+          <!-- Authentication Buttons (Desktop) -->
+          <div class="auth-buttons" id="authButtons">
+            <button id="loginBtn" class="btn btn-secondary">Login</button>
+            <button id="registerBtn" class="btn btn-primary">Register</button>
+          </div>
+
+          <!-- User Profile (Hidden by default) -->
+          <div id="userProfile" class="user-profile" style="display: none">
+            <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+          </div>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
         </div>
-        <div class="nav-links">
-          <ul>
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="guide_marketplace.html">Guides</a></li>
-            <li><a href="travel_stories.html">Travel Stories</a></li>
-            <li><a href="discover.html">AI Guide</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#featured">Explore</a></li>
-            <!-- Mobile Authentication Buttons -->
-            <li class="mobile-auth-buttons">
-              <button
-                id="mobileLoginBtn"
-                class="btn secondary-btn"
-                style="width: 100%; margin-bottom: 10px"
-              >
-                Login
-              </button>
-              <button
-                id="mobileRegisterBtn"
-                class="btn primary-btn"
-                style="width: 100%"
-              >
-                Register
-              </button>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+          <ul class="mobile-nav-list">
+            <li><a href="#" class="mobile-nav-link active">Home</a></li>
+            <li><a href="guide_marketplace.html" class="mobile-nav-link">Guides</a></li>
+            <li><a href="travel_stories.html" class="mobile-nav-link">Stories</a></li>
+            <li><a href="discover.html" class="mobile-nav-link">AI Guide</a></li>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#featured" class="mobile-nav-link">Explore</a></li>
+
+            <!-- Mobile Auth Buttons -->
+            <li class="mobile-auth" id="mobileAuthButtons">
+              <button id="mobileLoginBtn" class="btn btn-secondary btn-block">Login</button>
+              <button id="mobileRegisterBtn" class="btn btn-primary btn-block">Register</button>
             </li>
+
             <!-- Mobile User Profile -->
-            <li
-              id="mobileUserProfile"
-              class="mobile-user-profile"
-              style="display: none; padding: 15px; text-align: center"
-            >
-              <div style="margin-bottom: 10px; color: var(--dark-color)">
-                Welcome, <span id="mobileUserEmail"></span>
-              </div>
-              <button
-                id="mobileLogoutBtn"
-                class="btn secondary-btn"
-                style="width: 100%"
-              >
-                Logout
-              </button>
+            <li id="mobileUserProfile" class="mobile-user-section" style="display: none">
+              <button id="mobileLogoutBtn" class="btn btn-secondary btn-block">Logout</button>
             </li>
           </ul>
-        </div>
-        <!-- Authentication Buttons -->
-        <div class="auth-buttons">
-          <button id="loginBtn" class="btn secondary-btn">Login</button>
-          <button id="registerBtn" class="btn primary-btn">Register</button>
-        </div>
-        <!-- User Profile (Hidden by default) -->
-        <div id="userProfile" class="user-profile" style="display: none">
-          <div class="user-info">
-            <span id="userEmail"></span>
-            <button id="logoutBtn" class="btn secondary-btn">Logout</button>
-          </div>
-        </div>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+
         </div>
       </nav>
     </header>
@@ -179,7 +178,18 @@
             landscapes with local guides who know their homeland best
           </p>
           <div class="cta-buttons">
-            <a href="discover.html" class="btn hero-main-btn">Explore Nepal with AI</a>
+            <a href="discover.html" class="ai-discover-btn">
+              <div class="ai-btn-content">
+                <div class="ai-icon-wrapper">
+                  <i class="fas fa-sparkles"></i>
+                </div>
+                <div class="ai-btn-text">
+                  <span class="ai-btn-main">Explore Nepal with AI</span>
+                  <span class="ai-btn-subtitle">Powered by Intelligent Discovery</span>
+                </div>
+              </div>
+              <div class="ai-btn-glow"></div>
+            </a>
           </div>
         </div>
       </section>
@@ -231,18 +241,6 @@
               Discover places tourism books don't mention. Hidden waterfalls,
               ancient trails, and local festivals.
             </p>
-          </div>
-        </div>
-        <div class="ai-guide-cta">
-          <div class="ai-guide-content">
-            <div class="ai-guide-text">
-              <h3><i class="fas fa-robot"></i> Not sure where to start?</h3>
-              <p>
-                Our AI-powered guide can help you find the perfect rural
-                experience based on your interests and travel style.
-              </p>
-            </div>
-            <a href="discover.html" class="btn primary-btn">Try AI Guide</a>
           </div>
         </div>
       </section>
